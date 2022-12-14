@@ -6,6 +6,15 @@ using UnityEngine.Events;
 
 public class Pontuacao : MonoBehaviour
 {
+    //acessor
+    public int Pontos
+    {
+        get
+        {
+            return this.pontos;
+        }
+    }
+
     [SerializeField]
     private MeuEventoPersonalizadoInt aoPontuar;
 
