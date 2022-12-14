@@ -6,7 +6,7 @@ public class ControleMouse : MonoBehaviour
 {
     private void Update()
     {
-        var posicao = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var posicao = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
         this.transform.position = posicao;
     }
 }
