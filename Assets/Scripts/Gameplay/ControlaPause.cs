@@ -9,15 +9,21 @@ public class ControlaPause : MonoBehaviour
     [SerializeField, Range(0,1)]
     private float escalaTempoPause;
 
+    private bool jogoEstaParado;
+
     // Update is called once per frame
     void Update()
     {
         if (this.TocandoTela())
         {
+            if(this.jogoEstaParado)
             this.ContinuarJogo();
         }
         else{
-            PausarJogo();
+            if (!this.jogoEstaParado)
+            {
+                PausarJogo();
+            }
         }
     }
 
@@ -25,12 +31,21 @@ public class ControlaPause : MonoBehaviour
     {
         this.painelPause.SetActive(true);
         mudarEscalaTempo(escalaTempoPause);
+        this.jogoEstaParado = true;
     }
 
     private void ContinuarJogo()
     {
-        this.painelPause.SetActive(false);
+        StartCoroutine(this.EsperarEContinuarJogo());
+    }
+
+    private IEnumerator EsperarEContinuarJogo()
+    {
+        yield return new WaitForSecondsRealtime(0.2f);
         mudarEscalaTempo(1);
+        this.painelPause.SetActive(false);
+        this.jogoEstaParado = false;
+        
     }
 
     private bool TocandoTela()
