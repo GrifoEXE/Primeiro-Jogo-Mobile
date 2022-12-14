@@ -11,8 +11,13 @@ public class NovaPontuacao : MonoBehaviour
     void Start()
     {
         GameObject.FindObjectOfType<Pontuacao>();
+        var totalDePontos = -1;
+        if(this.pontuacao != null)
+        {
+            totalDePontos = this.pontuacao.Pontos;
+        }
 
-        this.textoPontuacao.AtualizarTexto(this.pontuacao.Pontos);
+        this.textoPontuacao.AtualizarTexto(totalDePontos);
     }
 
 }
