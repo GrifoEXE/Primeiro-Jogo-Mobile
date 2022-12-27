@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ public class Ranking : MonoBehaviour
 {
     private static string NOME_ARQUIVO = "Ranking.json";
     [SerializeField]
-    private List<int> pontos;
+    private List<Colocado> listaColocados;
 
     private string caminhoParaArquivo;
 
@@ -18,9 +19,10 @@ public class Ranking : MonoBehaviour
         JsonUtility.FromJsonOverwrite(textoJson, this);
     }
 
-    public void AdicionarPontuacao(int pontos)
+    public void AdicionarPontuacao(int pontos, string nome)
     {
-        this.pontos.Add(pontos);
+        var novoColocado = new Colocado(nome, pontos);
+        this.listaColocados.Add(novoColocado);
         this.SalvarRanking();
     }
 
@@ -33,11 +35,24 @@ public class Ranking : MonoBehaviour
 
     public int QuantidadePontosLista()
     {
-        return this.pontos.Count;
+        return this.listaColocados.Count;
     }
 
-    public IReadOnlyCollection<int> GetPontos()
+    public ReadOnlyCollection<Colocado> GetPontos()
     {
-        return this.pontos.AsReadOnly();
+        return this.listaColocados.AsReadOnly();
+    }
+}
+
+
+public class Colocado
+{
+    public string nome;
+    public int pontos;
+
+    public Colocado(string nome, int pontos)
+    {
+        this.nome = nome;
+        this.pontos = pontos;
     }
 }

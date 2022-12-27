@@ -20,7 +20,7 @@ public class NovaPontuacao : MonoBehaviour
         }
 
         this.textoPontuacao.AtualizarTexto(totalDePontos);
-        this.ranking.AdicionarPontuacao(totalDePontos);
+        this.ranking.AdicionarPontuacao(totalDePontos, "Nome");
     }
 
 }
